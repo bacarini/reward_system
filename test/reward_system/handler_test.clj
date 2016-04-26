@@ -1,7 +1,7 @@
-(ns reward-system.handler-test
+(ns reward_system.handler-test
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
-            [reward-system.handler :refer :all]))
+            [reward_system.handler :refer :all]))
 
 (deftest test-app
   (testing "main route"
