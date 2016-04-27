@@ -4,8 +4,8 @@
     "Create a vector of vectors (matrix)."
     [rows
      columns]
- (into [] (
-      for [ index (range rows) ]
+ (into []
+    (for [ index (range rows) ]
       (into [] (repeat columns 0)))))
 
 (defn ** [x n]
