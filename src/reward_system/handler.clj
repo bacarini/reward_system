@@ -5,15 +5,15 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
-(defn ranking []
-  (layout/common
-    [:h1 "Ranking:"]
-    [:h2 (print-str (core/test)) ]
-  ))
+; (defn ranking []
+;   (layout/common
+;     [:h1 "Ranking:"]
+;     [:h2 (print-str (core/test)) ]
+;   ))
 
 (defroutes app-routes
   (GET "/"         [] "Hello World")
-  (GET "/ranking"  [] (ranking))
+  ; (GET "/ranking"  [] (ranking))
   (route/not-found "Not Found"))
 
 (def app
