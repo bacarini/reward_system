@@ -1,12 +1,13 @@
 (ns reward_system.matrix)
 
 (defn create
-    "Create a vector of vectors (matrix)."
-    [rows
-     columns]
- (into []
+  "Create a vector of vectors (matrix)."
+  ([number]
+    (create number number))
+  ([rows columns]
+  (into []
     (for [ index (range rows) ]
-      (into [] (repeat columns 0)))))
+      (into [] (repeat columns 0))))))
 
 (defn ** [x n]
   (reduce * (repeat n x)))

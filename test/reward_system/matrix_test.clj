@@ -4,8 +4,10 @@
 
 (deftest matrix
   (testing "create"
-    (let [m (create 2 2)]
-      (is (= [[0 0] [0 0]] m))))
+    (testing "when there is only one param"
+      (is (= [[0 0] [0 0]] (create 2))))
+    (testing "when there are two params"
+      (is (= [[0 0] [0 0]] (create 2 2)))))
 
   (testing "**"
     (is (= 1 (** 0.5 0))))
