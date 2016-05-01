@@ -10,6 +10,7 @@
       (include-css "/css/jumbotron-narrow.css")
       (include-js  "/js/jquery.min.js")
       (include-js  "/js/bootstrap.min.js")
+      (include-js  "/js/bootstrap.file-input.js")
       (include-js  "/js/application.js")
     ]
     [:body

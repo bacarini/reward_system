@@ -7,6 +7,17 @@ body {
 .form-group {
   padding-right: 15px;
 }
+form.upload_file {
+  margin-top: 35px;
+
+}
+div.upload_file {
+  margin: 20px 0;
+}
+a.ranking {
+  margin-left: 15px;
+  text-decoration: underline;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

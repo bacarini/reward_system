@@ -14,7 +14,7 @@
 
 (defn add_score
   "Add a score into a Matrix."
-  [ matrix i j new_valeu]
+  [ matrix i j new_valeu ]
   (if (>= new_valeu 0)
     (assoc-in matrix [i j] (+ (nth (nth matrix i) j) (** 0.5 new_valeu)))
     matrix))

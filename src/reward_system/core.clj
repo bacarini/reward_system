@@ -114,11 +114,18 @@
 
 (defn all_involved
   "Returns everyone involved in the process of invitation,
-  no matter if they are friends or customers"
+  no matter if they are friends or customers."
   [graph]
   (s/union
     (set (into [] (map (fn [node] (get node :customer)) graph)))
     (set (into [] (map (fn [node] (get node :friend)) graph)))))
+
+(defn count_customers
+  "Counts all people involved in the process.
+
+  Returns a number."
+  []
+  (apply max (map #(Integer/parseInt %) (all_involved (@state :graph)))))
 
 (defn ranking
   "Returns the customer ranking of invitations process."
@@ -126,7 +133,7 @@
   (reset_invited)
   (if-not (nil? (@state :graph))
     (let [matrix (load_matrix (reverse (@state :graph))
-                                 (matrix/create 6))]
+                                 (matrix/create (count_customers)))]
         (sort-by val > (into {} (map #(get_values_from_customer % matrix) (all_involved (@state :graph)))))
         )))
 
@@ -141,8 +148,6 @@
 
 (defn -main []
   (reset_all)
-  (let [invitations (read_file "input.txt")
-        count_customer (count (set (flatten invitations)))
-      ]
+  (let [invitations (read_file "input.txt")]
     (load_graph invitations)
     (println (ranking))))
