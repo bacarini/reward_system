@@ -12,6 +12,22 @@
     :invited (sorted-set)
   }))
 
+(defn reset_invited
+  "Resets the invited list."
+  []
+  (swap! state assoc-in [:invited] (sorted-set)))
+
+(defn reset_graph
+  "Resets the graph."
+  []
+  (swap! state assoc-in [:graph]   nil))
+
+(defn reset_all
+  "Resets the atom."
+  []
+  (reset_invited)
+  (reset_graph))
+
 (defn select_predecessor
   "Selects the predecessor of specific node.
 
@@ -62,8 +78,8 @@
     (if (= (get-in node [:friend]) search)
       (get-in node [:customer]))))
 
-(defn build_node
-  "It builds the node.
+(defn add_node
+  "It add node into a graph.
 
   Returns a node
   Ex. {:customer '2' :friend '3' :predecessor '1'}"
@@ -71,15 +87,8 @@
   (let [ node { :customer customer
                 :friend friend
                 :predecessor (last (remove nil? (find_predecessor customer)))
-              }] node ))
-
-(defn load_graph
-  "Loads a graph from a list of given invitations.
-
-  Does not return any value."
-  [invitations]
-    (doseq [[customer friend] invitations]
-      (swap! state update-in [:graph] conj (build_node customer friend))))
+              }]
+      (swap! state update-in [:graph] conj node)))
 
 (defn split_line
   "Given a string with 2 ids, customer and friend in this context, splits into a list.
@@ -113,22 +122,27 @@
 
 (defn ranking
   "Returns the customer ranking of invitations process."
-  [matrix]
-    (sort-by val >
-      (into {} (map #(get_values_from_customer % matrix) (all_involved (@state :graph))))))
-
-(defn reset
-  "Resets the atom."
   []
-  (swap! state assoc-in [:graph]   nil)
-  (swap! state assoc-in [:invited] (sorted-set)))
+  (reset_invited)
+  (if-not (nil? (@state :graph))
+    (let [matrix (load_matrix (reverse (@state :graph))
+                                 (matrix/create 6))]
+        (sort-by val > (into {} (map #(get_values_from_customer % matrix) (all_involved (@state :graph)))))
+        )))
+
+(defn load_graph
+  "Loads a graph from a list of given invitations.
+
+  Does not return any value."
+  [invitations]
+  (reset_graph)
+  (doseq [[customer friend] invitations]
+    (add_node customer friend)))
 
 (defn -main []
-    (reset)
-    (let [invitations (read_file "input.txt")
-          count_customer (count (set (flatten invitations)))
-        ]
-      (load_graph invitations)
-      (println (ranking
-                  (load_matrix (reverse (@state :graph))
-                     (matrix/create count_customer))))))
+  (reset_all)
+  (let [invitations (read_file "input.txt")
+        count_customer (count (set (flatten invitations)))
+      ]
+    (load_graph invitations)
+    (println (ranking))))
