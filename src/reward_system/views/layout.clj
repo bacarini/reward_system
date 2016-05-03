@@ -4,7 +4,7 @@
 (defn common [& block]
   (html5
     [:head
-      [:title "Bootstrapped Example"]
+      [:title "Bacarini - Reward System"]
       [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
       (include-css "/css/bootstrap.css")
       (include-css "/css/jumbotron-narrow.css")

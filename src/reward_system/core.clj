@@ -74,21 +74,24 @@
 
   Returns the predecessor (:customer)"
   [search]
-  (for [ node (into [] (get @state :graph)) ]
-    (if (= (get-in node [:friend]) search)
-      (get-in node [:customer]))))
+  (last
+    (remove nil?
+      (for [ node (into [] (get @state :graph)) ]
+        (if (= (get-in node [:friend]) search)
+          (get-in node [:customer]))))))
 
 (defn add_node
-  "It add node into a graph.
+  "It adds a new node into the graph.
 
   Returns a node
   Ex. {:customer '2' :friend '3' :predecessor '1'}"
   [customer friend]
-  (let [ node { :customer customer
-                :friend friend
-                :predecessor (last (remove nil? (find_predecessor customer)))
-              }]
-      (swap! state update-in [:graph] conj node)))
+  (let [ predecessor (find_predecessor customer)
+       node { :customer customer
+              :friend friend
+              :predecessor (if-not (= predecessor friend) predecessor)
+            }]
+    (swap! state update-in [:graph] conj node)))
 
 (defn split_line
   "Given a string with 2 ids, customer and friend in this context, splits into a list.

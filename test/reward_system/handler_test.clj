@@ -7,7 +7,8 @@
   (testing "main route"
     (let [response (app (mock/request :get "/"))]
       (is (= (:status response) 200))
-      (is (= (:body response) "Hello World"))))
+      (is (.contains (:body response) "Reward System"))
+      (is (re-find #"invite" (:body response)))))
 
   (testing "not-found route"
     (let [response (app (mock/request :get "/invalid"))]
