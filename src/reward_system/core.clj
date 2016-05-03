@@ -46,16 +46,16 @@
     (setting_value_to_matrix matrix node 0))
   ([matrix node score]
   (if-not (nil? (get node :predecessor))
-      (if-not (and (= score 0) (contains? (@state :invited) (get node :customer)))
-        (do
-            (swap! state update-in [:invited] conj (get node :customer) )
-            (setting_value_to_matrix (matrix/add_score matrix
-                                        (- (Integer/parseInt (get node :customer)) 1)
-                                        (- (Integer/parseInt (get node :friend)) 1)
-                                        (- score 1))
-                                     (select_predecessor (get node :predecessor))
-                                     (+ 1 score)))
-        matrix)
+    (if-not (and (= score 0) (contains? (@state :invited) (get node :customer)))
+      (do
+        (swap! state update-in [:invited] conj (get node :customer) )
+        (setting_value_to_matrix (matrix/add_score matrix
+                                    (- (Integer/parseInt (get node :customer)) 1)
+                                    (- (Integer/parseInt (get node :friend)) 1)
+                                    (- score 1))
+                                 (select_predecessor (get node :predecessor))
+                                 (+ 1 score)))
+      matrix)
     (matrix/add_score matrix (- (Integer/parseInt (get node :customer)) 1)
                              (- (Integer/parseInt (get node :friend)) 1)
                              (- score 1)))))
@@ -127,8 +127,8 @@
   "Counts all people involved in the process.
 
   Returns a number."
-  []
-  (apply max (map #(Integer/parseInt %) (all_involved (@state :graph)))))
+  [graph]
+  (apply max 0 (map #(Integer/parseInt %) (all_involved graph))))
 
 (defn ranking
   "Returns the customer ranking of invitations process."
@@ -136,7 +136,7 @@
   (reset_invited)
   (if-not (nil? (@state :graph))
     (let [matrix (load_matrix (reverse (@state :graph))
-                                 (matrix/create (count_customers)))]
+                                 (matrix/create (count_customers (@state :graph))))]
         (sort-by val > (into {} (map #(get_values_from_customer % matrix) (all_involved (@state :graph)))))
         )))
 
