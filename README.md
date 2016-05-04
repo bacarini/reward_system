@@ -1,7 +1,7 @@
 # Reward system
-It is a reward system that will give a customer points for each confirmed invitation they played a part into.
+It is a reward system that will give customers points for each confirmed invitation they played a part into.
 
-The solution is based on [Sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix) and [directed graph](https://en.wikipedia.org/wiki/Directed_graph).
+The solution is based on [sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix) and [directed graph](https://en.wikipedia.org/wiki/Directed_graph) concepts.
 ___
 
 ## Prerequisites
@@ -21,17 +21,17 @@ lein ring server
 ```
 
 #### Home
-You can invite yours friends by input one by one or send a file with multi invitation at the same time.
+You can invite your friends by inputing one by one or send a file that has all the invitations in it.
 
 ![](resources/private/home.png)
 
 #### Error
-In case of your file isn't format correct an error might shows up. Don't worry, you can fix and try it again.
+In case your file isn't in the correct format an error might show up. Don't worry, you can fix it and try again.
 
 ![](resources/private/error.png)
 
 #### Confirmation of your invite
-All good? So now, you can go back where you were and invite more of your friend or see are ranking.
+All good? So now, you can go back where you were and invite more friends or see the ranking.
 
 ![](resources/private/invitation.png)
 
@@ -39,7 +39,7 @@ All good? So now, you can go back where you were and invite more of your friend 
 ![](resources/private/ranking.png)
 
 #### Reset
-If you would like to reset all the counting, you also can reset the data.
+It is also possible to reset the data.
 
 ___
 ## Testing

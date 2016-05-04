@@ -36,7 +36,7 @@
       [:h1 "Good one!"]
       [:h4 "Your invitation has been sent."]
       [:a.btn.btn-primary {:href "/"} "Click here to invite more friends"]
-      [:a.ranking {:href "/ranking"} "Or you can see how is the ranking"])))
+      [:a.ranking {:href "/ranking"} "Or checkout the ranking"])))
 
 (defn upload_file
   "Uploads file and adds invitations into the graph."
@@ -49,10 +49,10 @@
       [:h1 "Good one!"]
       [:h4 "Your invitation has been sent."]
       [:a.btn.btn-primary {:href "/"} "Click here to invite more friends"]
-      [:a.ranking {:href "/ranking"} "Or you can see how is the ranking"])
+      [:a.ranking {:href "/ranking"} "Or checkout the ranking"])
     (catch AssertionError e
       (layout/common
-        [:h3 "Sorry, Could not process your file :("]
+        [:h3 "Sorry, your file could not be processed :("]
         [:a.btn.btn-primary {:href "/"} "Try it again"]))))
 
 (defroutes app-routes
