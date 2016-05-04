@@ -3,6 +3,7 @@ It is a reward system that will give a customer points for each confirmed invita
 
 The solution is based on [Sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix) and [directed graph](https://en.wikipedia.org/wiki/Directed_graph).
 ___
+
 ## Prerequisites
 
 You will need Leiningen 2 installed. The code was developed & tested with these versions:
@@ -19,25 +20,25 @@ To start a web server for the application, run:
 lein ring server
 ```
 
-##### Home
+#### Home
 You can invite yours friends by input one by one or send a file with multi invitation at the same time.
 
-image:resources/private/home.png[]
+![](resources/private/home.png)
 
-##### Error
+#### Error
 In case of your file isn't format correct an error might shows up. Don't worry, you can fix and try it again.
 
-image:resources/private/error.png[]
+![](resources/private/error.png)
 
-##### Confirmation of your invite
+#### Confirmation of your invite
 All good? So now, you can go back where you were and invite more of your friend or see are ranking.
 
-image:resources/private/invitation.png[]
+![](resources/private/invitation.png)
 
-##### Ranking
-image:resources/private/ranking.png[]
+#### Ranking
+![](resources/private/ranking.png)
 
-##### Reset
+#### Reset
 If you would like to reset all the counting, you also can reset the data.
 
 ___
